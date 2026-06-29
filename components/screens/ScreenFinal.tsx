@@ -9,7 +9,7 @@
 import { useState } from "react";
 import Button from "@/components/ui/Button";
 import { Respostas } from "@/types/respostas";
-import { copiarRespostas, baixarTxt, enviarWhatsApp } from "@/lib/export";
+import { copiarRespostas, baixarTxt, enviarWhatsApp, enviarEmail } from "@/lib/export";
 import { limparRespostas } from "@/lib/storage";
 
 interface Props {
@@ -20,6 +20,8 @@ interface Props {
 export default function ScreenFinal({ respostas, onReiniciar }: Props) {
   const [copiado, setCopiado] = useState(false);
   const [confirmandoLimpar, setConfirmandoLimpar] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailVisivel, setEmailVisivel] = useState(false);
 
   const handleCopiar = async () => {
     try {
@@ -29,6 +31,14 @@ export default function ScreenFinal({ respostas, onReiniciar }: Props) {
     } catch {
       alert("Não foi possível copiar. Tente novamente.");
     }
+  };
+
+  const handleEmail = () => {
+    if (!emailVisivel) {
+      setEmailVisivel(true);
+      return;
+    }
+    enviarEmail(respostas, email || undefined);
   };
 
   const handleLimpar = () => {
@@ -162,6 +172,60 @@ export default function ScreenFinal({ respostas, onReiniciar }: Props) {
           >
             Enviar pelo WhatsApp
           </Button>
+
+          {/* Enviar por e-mail */}
+          <div className="pt-1">
+            {emailVisivel ? (
+              <div className="space-y-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Seu e-mail (opcional)"
+                  className="w-full bg-transparent border-b border-[#E8E8E4] pb-2 pt-1 text-center"
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "14px",
+                    fontWeight: 300,
+                    color: "#1A1A1A",
+                    outline: "none",
+                  }}
+                  autoFocus
+                />
+                <p
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "11px",
+                    color: "#C4C4C0",
+                    letterSpacing: "0.04em",
+                  }}
+                >
+                  Uma cópia será enviada para você e para a GM.
+                </p>
+                <Button onClick={handleEmail} variante="secondary" fullWidth>
+                  Confirmar envio por e-mail
+                </Button>
+                <button
+                  onClick={() => setEmailVisivel(false)}
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "12px",
+                    color: "#C4C4C0",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: "4px",
+                  }}
+                >
+                  Cancelar
+                </button>
+              </div>
+            ) : (
+              <Button onClick={handleEmail} variante="secondary" fullWidth>
+                Enviar por e-mail
+              </Button>
+            )}
+          </div>
 
           {/* Limpar */}
           <div className="pt-4">

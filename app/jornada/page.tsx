@@ -9,6 +9,7 @@ import {
   salvarTela,
 } from "@/lib/storage";
 
+import ScreenSplash from "@/components/screens/ScreenSplash";
 import ScreenWelcome from "@/components/screens/ScreenWelcome";
 import ScreenCarta from "@/components/screens/ScreenCarta";
 import ScreenRitual from "@/components/screens/ScreenRitual";
@@ -49,10 +50,11 @@ export default function JornadaPage() {
     const r = carregarRespostas();
     const t = carregarTela();
     setRespostas(r);
-    // Só restaura a tela se não for a tela final — deixa sempre entrar pela boas-vindas
-    // mas restaura se estava no meio da jornada
+    // Sempre começa pela splash, independente do estado salvo
+    setTela(-1);
+    // Guarda a tela real para restaurar após splash
     if (t > 0 && t < TOTAL_TELAS - 1) {
-      setTela(t);
+      salvarTela(t);
     }
     setCarregado(true);
   }, []);
@@ -140,6 +142,18 @@ export default function JornadaPage() {
           GM™
         </span>
       </div>
+    );
+  }
+
+  // Tela -1 — Splash
+  if (tela === -1) {
+    return (
+      <ScreenSplash
+        onConcluir={() => {
+          const t = carregarTela();
+          setTela(t > 0 && t < TOTAL_TELAS - 1 ? t : 0);
+        }}
+      />
     );
   }
 

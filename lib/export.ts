@@ -80,3 +80,17 @@ export function enviarWhatsApp(respostas: Respostas): void {
   const encoded = encodeURIComponent(texto);
   window.open(`https://wa.me/5521983461734?text=${encoded}`, "_blank");
 }
+
+export function enviarEmail(respostas: Respostas, emailParticipante?: string): void {
+  const texto = formatarRespostas(respostas);
+  const assunto = encodeURIComponent("GM Discovery Experience™ — Minhas respostas");
+  const corpo = encodeURIComponent(texto);
+  const para = "contato@braryeditora.com";
+  const ccParam = emailParticipante
+    ? `&cc=${encodeURIComponent(emailParticipante)}`
+    : "";
+  window.open(
+    `mailto:${para}?subject=${assunto}${ccParam}&body=${corpo}`,
+    "_blank"
+  );
+}
