@@ -13,6 +13,7 @@
   --ink-faint: #C4C4C0;
   --accent: #1A1A1A;
   --border: #E8E8E4;
+  color-scheme: light;
 }
 
 * {
@@ -22,14 +23,17 @@
 html {
   background-color: var(--cream);
   color: var(--ink);
+  color-scheme: light;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background-color: var(--cream);
+  color: var(--ink);
   font-family: 'Inter', sans-serif;
   font-weight: 300;
+  color-scheme: light;
 }
 
 .font-display {
@@ -48,6 +52,12 @@ textarea {
 
 textarea:focus {
   outline: none;
+}
+
+/* Foco visível — navegação por teclado, em todo o site */
+:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 3px;
 }
 
 /* Scrollbar discreta */
