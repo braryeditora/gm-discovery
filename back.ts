@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: "#F5F3EE",
+        cream: "#FAFAF8",
         ink: "#1A1A1A",
         "ink-light": "#6B6B6B",
         "ink-faint": "#C4C4C0",

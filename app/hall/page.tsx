@@ -81,9 +81,9 @@ export default function HallPage() {
             gap: "12px",
           }}
         >
-          {/* Secundário — Conhecer o processo */}
+          {/* Secundário — Conhecer a GM (antes: Conhecer o processo → /processo) */}
           <Link
-            href="/processo"
+            href="/institucional"
             style={{
               display: "block",
               padding: "13px 24px",
@@ -97,19 +97,19 @@ export default function HallPage() {
               textAlign: "center",
               transition: "background 0.2s, color 0.2s",
             }}
-            onMouseEnter={e => {
+            onMouseEnter={(e) => {
               (e.currentTarget as HTMLAnchorElement).style.background = "#1A1A1A";
               (e.currentTarget as HTMLAnchorElement).style.color = "#F5F3EE";
             }}
-            onMouseLeave={e => {
+            onMouseLeave={(e) => {
               (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
               (e.currentTarget as HTMLAnchorElement).style.color = "#1A1A1A";
             }}
           >
-            Conhecer o processo
+            Conhecer a GM
           </Link>
 
-          {/* Primário — Iniciar minha jornada */}
+          {/* Primário — Iniciar minha jornada (inalterado) */}
           <Link
             href="/jornada"
             style={{
@@ -125,10 +125,10 @@ export default function HallPage() {
               textAlign: "center",
               transition: "background 0.2s",
             }}
-            onMouseEnter={e => {
+            onMouseEnter={(e) => {
               (e.currentTarget as HTMLAnchorElement).style.background = "#333";
             }}
-            onMouseLeave={e => {
+            onMouseLeave={(e) => {
               (e.currentTarget as HTMLAnchorElement).style.background = "#1A1A1A";
             }}
           >
